@@ -1,83 +1,277 @@
 body {
-  background-color: #444;
+  background-color: #fff;
   font-family: Ubuntu, sans-serif;
-  color: #fff;
+  color: #444;
 }
 
-.row {
-  align-items: center;
-  justify-content: center;  /* aligns div center */
-  text-align: center;
-}
-
+/* Make all divs flexbox and center */
+.row,
 .row div {
   display: flex;
   align-items: center;
-  justify-content: center;  /* aligns div center */
+  justify-content: center; /* aligns div center */
   text-align: center;
 }
 
 h1 {
   font-size: 2rem;
   display: inline-block;
-  color: white;
+  color: #444;
   margin-top: 3rem;
-  margin-bottom: 8rem;
   border-bottom: 4px solid #fff;
   width: 400px;
+}
+
+small {
+  margin-bottom: 2rem;
 }
 
 /* Base layer set to relative */
 .pieContainer {
   /* for maxed out screen col-8 */
-  height: 730px; 
+  height: 730px;
   width: 100%;
   position: relative;
   margin-bottom: 5rem;
-  /* border: cornsilk solid 1px; */
 }
 
-/* Shadow Background
-.pieBackground {
+.stroke {
   position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 75px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-} */
-
-/* Main colored pie */
-.pie {
-  position: absolute;
-  width: 650px;   /*~90%*/
-  height: 650px;
-  border-radius: 325px; /* half of width */
-  clip: rect(0px, 325px, 650px, 0px);
+  width: 0;
+  height: 100%;
+  z-index: 3;
+  /* change color to same as background */
+  border-left: #fff solid 10px;
 }
 
-/* visible masking pie */
+/* Rotate out each stroke line */
+.line2 {
+  transform: rotate(36deg);
+}
+.line3 {
+  transform: rotate(72deg);
+}
+.line4 {
+  transform: rotate(108deg);
+}
+.line5 {
+  transform: rotate(144deg);
+}
+
+#pieSlice2 {
+  transform: rotate(36deg);
+}
+#pieSlice3 {
+  transform: rotate(72deg);
+}
+#pieSlice4 {
+  transform: rotate(108deg);
+}
+#pieSlice5 {
+  transform: rotate(144deg);
+}
+#pieSlice6 {
+  transform: rotate(180deg);
+}
+#pieSlice7 {
+  transform: rotate(216deg);
+}
+#pieSlice8 {
+  transform: rotate(252deg);
+}
+#pieSlice9 {
+  transform: rotate(288deg);
+}
+#pieSlice10 {
+  transform: rotate(324deg);
+  /* Shorten mask so it doesn't overlap pieSlice 1 & 2 hover effects */
+  clip: rect(0px, 730px, 215px, 365px);
+}
+
+/* Visible mask for pie */
 .hold {
   position: absolute;
-  width: 730px;   
+  width: 730px;
   height: 730px;
-  border-radius: 365px; 
-  /* Show only 1/4 circle */
+  border-radius: 365px;
   clip: rect(0px, 730px, 365px, 365px);
 }
 
-#pieSlice1 .pie {
-  background-color: #1b458b;
+/* Main colored pie (half circle) */
+.pie {
+  position: absolute;
+  width: 650px; /*~90%*/
+  height: 650px;
+  border-radius: 325px; /* half of width */
+  background-color: #3cc37f;
+  clip: rect(0px, 325px, 650px, 0px);
   transform: rotate(36deg);
+  transition: all 0.4s;
 }
 
-#pieSlice1 .pie {z-index: 1;}
-/*#pieSlice2 .pie {z-index: 2;}
- #pieSlice3 .pie,
-#pieSlice4 .pie  */
+/* needed or piSlice10 covers up pieSlice1 */
+#pieSlice1 .pie {
+  z-index: 1;
+}
 
+.sub-title {
+  position: absolute;
+  top: 0;
+  width: 75px;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  /* immidiately turn invisible as hover goes off */
+  transition: all 0s;
+}
 
+/* Pie slice sub-titles */
+#pieSlice1 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-36deg);
+}
 
-#pieSlice1 .pie:hover,
+#pieSlice2 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-72deg);
+}
+
+#pieSlice3 .pie .sub-title {
+  left: 235px;
+  top: 70px;
+  transform: rotate(-108deg);
+}
+
+#pieSlice4 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-144deg);
+}
+
+#pieSlice5 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-180deg);
+}
+
+#pieSlice6 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-216deg);
+}
+
+#pieSlice7 .pie .sub-title {
+  left: 240px;
+  top: 70px;
+  transform: rotate(-252deg);
+}
+
+#pieSlice8 .pie .sub-title {
+  left: 235px;
+  top: 70px;
+  transform: rotate(-288deg);
+}
+
+#pieSlice9 .pie .sub-title {
+  left: 235px;
+  top: 70px;
+  transform: rotate(-324deg);
+}
+
+#pieSlice10 .pie .sub-title {
+  left: 245px;
+  top: 70px;
+}
+
+/* Different color per slice
+#pieSlice2 .pie { background-color: #0a0; } 
+#pieSlice3 .pie { background-color: #f80; } 
+#pieSlice4 .pie { background-color: #08f; }
+#pieSlice5 .pie { background-color: #a04; }
+#pieSlice6 .pie { background-color: aqua; }
+#pieSlice7 .pie { background-color: brown; }
+#pieSlice8 .pie { background-color: crimson; }
+#pieSlice9 .pie { background-color: fuchsia; }
+#pieSlice10 .pie { background-color: goldenrod; } */
+
+/* Light green accent */
+.lightGreenPie {
+  position: absolute;
+  width: 438px;
+  height: 438px;
+  border-radius: 219px;
+  z-index: 2;
+  /* background-color: #59cc92; */
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Inner Circle where text resides */
+.innerCircle {
+  position: absolute;
+  width: 365px;
+  height: 365px;
+  border-radius: 365px;
+  background-color: #fff;
+  /* Z-index must be above or = to stroke lines */
+  z-index: 3;
+}
+
+/* Inner Text  */
+.innerCircle > div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 365px;
+  height: 365px;
+  color: #00b158;
+  padding: 40px;
+  font-size: 15px;
+  line-height: 1.4rem;
+  border-radius: 183px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Inner Circle main title */
+.innerCircle .content-title {
+  position: absolute;
+  width: 300px;
+  padding: 0;
+  font-size: 2.6rem;
+  line-height: 2.8rem;
+  font-weight: 600;
+  visibility: hidden;
+  opacity: 0;
+  color: #00b158;
+  z-index: 5;
+}
+
+.btn-primary {
+  font-size: 13px;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 40px;
+  background-color: #00b158;
+  border-color: #00b158;
+}
+
+/* Hover Effects */
+.btn-primary:hover {
+  background-color: #33df00;
+  border-color: #33df00;
+}
+
+/* individually target ID if you want to keep background color */
+/* #pieSlice1 .pie:hover,
 #pieSlice2 .pie:hover,
 #pieSlice3 .pie:hover,
 #pieSlice4 .pie:hover,
@@ -86,121 +280,35 @@ h1 {
 #pieSlice7 .pie:hover,
 #pieSlice8 .pie:hover,
 #pieSlice9 .pie:hover,
-#pieSlice10 .pie:hover
-{
-  transition: all 0.5s;
-  background-color: blueviolet;
-  width: 730px;   /*100%*/
+#pieSlice10 .pie:hover, */
+
+.pie:hover {
+  background-color: #28b257;
+  width: 730px; /* 100% */
   height: 730px;
-  border-radius: 365px; /* half of width */
+  border-radius: 365px;
   clip: rect(0px, 365px, 730px, 0px);
 }
- 
-#pieSlice2 {
-  transform: rotate(36deg);
+
+/* Make Visible */
+.content-title.is-visible,
+.content1.is-visible,
+.content2.is-visible,
+.content3.is-visible,
+.content4.is-visible,
+.content5.is-visible,
+.content6.is-visible,
+.content7.is-visible,
+.content8.is-visible,
+.content9.is-visible,
+.content10.is-visible {
+  visibility: visible;
+  opacity: 1;
 }
 
-#pieSlice2 .pie {
-  background-color: #0a0;
-  transform: rotate(36deg);
-}
-
-#pieSlice3 {
-  transform: rotate(72deg);
-}
-
-#pieSlice3 .pie {
-  background-color: #f80;
-  transform: rotate(36deg);
-}
-
-#pieSlice4 {
-  transform: rotate(108deg);
-}
-
-#pieSlice4 .pie {
-  background-color: #08f;
-  transform: rotate(36deg);
-}
-
-#pieSlice5 {
-  transform: rotate(144deg);
-}
-
-#pieSlice5 .pie {
-  background-color: #a04;
-  transform: rotate(36deg);
-}
-
-#pieSlice6 {
-  transform: rotate(180deg);
-}
-
-#pieSlice6 .pie {
-  background-color: aqua;
-  transform: rotate(36deg);
-} 
-
-#pieSlice7 {
-  transform: rotate(216deg);
-}
-
-#pieSlice7 .pie {
-  background-color: brown;
-  transform: rotate(36deg);
-} 
-
-#pieSlice8 {
-  transform: rotate(252deg);
-}
-
-#pieSlice8 .pie {
-  background-color: crimson;
-  transform: rotate(36deg);
-} 
-#pieSlice9 {
-  transform: rotate(288deg);
-}
-
-#pieSlice9 .pie {
-  background-color: fuchsia;
-  transform: rotate(36deg);
-} 
-#pieSlice10 {
-  transform: rotate(324deg);
-  z-index: 0;
-}
-
-#pieSlice10 .pie {
-  background-color: goldenrod;
-  transform: rotate(36deg);
-} 
-
-.lightGreenPie, .innerCircle {
-  position: absolute;
-  border-radius: 365px;
-  /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5) inset; */ 
-}
-
-.lightGreenPie{
-  width: 65%;
-  height: 65%;
-  background-color: #59cc92;
-}
-
-.innerCircle{
-  width: 50%;
-  height: 50%;
-  background-color: #444;
-  color: white;
-}
-
-.innerCircle .content {
-  position: absolute;
-  display: block;
-  width: 120px;
-  top: 30px;
-  left: 0;
-  text-align: center;
-  font-size: 14px;
+.sub-title.is-visible {
+  visibility: visible;
+  opacity: 1;
+  /* Delay visibility after animation */
+  transition-delay: 0.4s;
 }
